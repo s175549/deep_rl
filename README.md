@@ -1,6 +1,5 @@
 # deep-rl
 
-\begin{itemize}
-  \item Something
-  \item Sometgin 2
-\end{itemize}
+* First bullet point
+* Second bullet point
+* Third bullet point
