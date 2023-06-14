@@ -29,7 +29,7 @@ class AC(nn.Module):
                 nn.init.kaiming_uniform_(layer.weight, nonlinearity='relu')
 
         self.actor_optimizer = optim.Adam(self.actor.parameters(), lr=alpha_actor+alpha_actor*0.1)
-        self.scheduler = lr_scheduler.StepLR(self.actor_optimizer, step_size=int(num_frames/(500)), gamma=0.9)
+        self.scheduler = lr_scheduler.StepLR(self.actor_optimizer, step_size=int(num_frames/(300)), gamma=0.9)
 
         # Critic network
         self.critic = nn.Sequential(
@@ -45,7 +45,7 @@ class AC(nn.Module):
             if isinstance(layer, nn.Linear):
                 nn.init.kaiming_uniform_(layer.weight, nonlinearity='relu')
         self.critic_optimizer = optim.Adam(self.critic.parameters(), lr=alpha_critic)
-        self.critic_scheduler = lr_scheduler.StepLR(self.critic_optimizer, step_size=int(num_frames/(500)), gamma=0.9)
+        self.critic_scheduler = lr_scheduler.StepLR(self.critic_optimizer, step_size=int(num_frames/(300)), gamma=0.9)
 
         self.gamma = gamma
         self.beta = beta
@@ -89,46 +89,48 @@ class AC(nn.Module):
         else:
             states, actions, rewards, next_states, done = map(lambda x: torch.tensor(x), batch)
 
-        # Get the predicted values of the current states and next states
-        probs, values = self.forward(states)
-        _, next_values = self.forward(next_states)
+        # Loop over epochs
+        for _ in range(num_epochs):
+            # Get the predicted values of the current states and next states
+            probs, values = self.forward(states)
+            _, next_values = self.forward(next_states)
 
-        # Compute the TD target
-        td_target = rewards + self.gamma * next_values.squeeze().detach() * (1 - done.float())
+            # Compute the TD target
+            td_target = rewards + self.gamma * next_values.squeeze().detach() * (1 - done.float())
 
-       # Compute the TD error and advantages
-        td_error = td_target - values.squeeze()
-        advantages = torch.zeros_like(rewards)
-        acc = 0
-        for t in reversed(range(len(rewards))):
-            acc = td_error[t] + self.gamma * self.lambda_ * acc * (1 - done[t].float())
-            advantages[t] = acc
-        
-        # Compute actor loss
-        probs = probs.gather(1, actions.unsqueeze(1))
-        log_probs = torch.log(probs)
-        entropy = torch.mean(torch.tensor(entropies))
-        actor_loss = -(log_probs.squeeze() * advantages.detach()).mean() + self.beta * entropy
+            # Compute the TD error and advantages
+            td_error = td_target - values.squeeze()
+            advantages = torch.zeros_like(rewards)
+            acc = 0
+            for t in reversed(range(len(rewards))):
+                acc = td_error[t] + self.gamma * self.lambda_ * acc * (1 - done[t].float())
+                advantages[t] = acc
+            
+            # Compute actor loss
+            probs = probs.gather(1, actions.unsqueeze(1))
+            log_probs = torch.log(probs)
+            entropy = torch.mean(torch.tensor(entropies))
+            actor_loss = -(log_probs.squeeze() * advantages.detach()).mean() + self.beta * entropy
 
-        # Update actor network
-        self.actor_optimizer.zero_grad()
-        actor_loss.backward(retain_graph=True)
-        nn.utils.clip_grad_norm_(self.actor.parameters(), self.max_norm)
-        self.actor_optimizer.step()
+            # Update actor network
+            self.actor_optimizer.zero_grad()
+            actor_loss.backward(retain_graph=True)
+            nn.utils.clip_grad_norm_(self.actor.parameters(), self.max_norm)
+            self.actor_optimizer.step()
 
 
-        # Compute critic loss
-        critic_loss = nn.MSELoss()(values.squeeze(),td_target.detach())
-        entropy = torch.mean(torch.tensor(entropies))
-        critic_loss += self.beta*entropy
+            # Compute critic loss
+            critic_loss = nn.MSELoss()(values.squeeze(),td_target.detach())
+            entropy = torch.mean(torch.tensor(entropies))
+            critic_loss += self.beta*entropy
 
-        # Update critic network
-        self.critic_optimizer.zero_grad()
-        critic_loss.backward(retain_graph=True)
-        nn.utils.clip_grad_norm_(self.critic.parameters(), max_norm=self.max_norm)
-        self.critic_optimizer.step()
+            # Update critic network
+            self.critic_optimizer.zero_grad()
+            critic_loss.backward(retain_graph=True)
+            nn.utils.clip_grad_norm_(self.critic.parameters(), max_norm=self.max_norm)
+            self.critic_optimizer.step()
 
-        self.scheduler_step()
+            self.scheduler_step()
 
         # Clear buffer
         self.buffer.clear()

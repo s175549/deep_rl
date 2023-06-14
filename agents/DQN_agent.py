@@ -30,6 +30,8 @@ class DQN(Net):
 
         state = env.reset()
 
+        i = 0 
+        u = 0
         for _ in range(self.n_init):
 
             # Take a random action
@@ -37,13 +39,14 @@ class DQN(Net):
             next_state, reward, terminated, _ = env.step(action)
 
             # Store the transition in the replay buffer
-            self.buffer.store(state, action, reward, next_state, terminated)
+            self.buffer.store(u, i, state, action, reward, next_state, None, terminated)
 
             if terminated:
                 state = env.reset()
+                u += 1
             else:
                 state = next_state
-
+            i += 1
         env.close()
 
     def update_eps(self):

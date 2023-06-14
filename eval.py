@@ -50,9 +50,9 @@ if __name__=="__main__":
     print("Env name: ", env_name)
 
     # Define learning algorithm
-    #method = 'DQN'
+    method = 'DQN'
     #method = 'REINFORCE'
-    method = 'AC'
+    #method = 'AC'
     #method = 'PPO'
     #method = 'SAC'
 
