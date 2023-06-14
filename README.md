@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 ## Overview of code
 
-main.py: This is the main file to run all experiments. There is a function 'run_main(env,method,hyperparameters)' where a certain method (DeepRL algorithm) is trained on a specific enviroment with a number of hyperparameters. 
+`main.py`: This is the main file to run all experiments. There is a function 'run_main(env,method,hyperparameters)' where a certain method (DeepRL algorithm) is trained on a specific enviroment with a number of hyperparameters. 
 * env: A string 'LunarLander-v2' or 'CartPole-v1'
 * method: A string 'DQN', 'REINFORCE', 'AC' or 'PPO'
 * hyperparameters: A dictonary with all parameters. An example could be:     
@@ -49,8 +49,9 @@ hyperparameters = {
 
 The agent get initialized with 'get_agent(...)' from utils and then the agent can either be trained or evaluated. If 'train_agent' = True, the function calls 'train' from 'train.py' which returns the results from the training. 
 
-train.py: This is the main training loop for all agents, where the agent interact with the enviroment and gets updated. Note that the agents will be updated at different times e.g. REINFORCE after each episode, DQN after each frame. 
+`train.py`: This is the main training loop for all agents, where the agent interact with the enviroment and gets updated. Note that the agents will be updated at different times e.g. REINFORCE after each episode, DQN after each frame. 
 
+`eval.py`: If the goal is to see how the agent performs across 10 episodes run `eval.py` and select the 'method' variable to be 'DQN', 'REINFORCE', 'AC' or 'PPO' and select the enviroment 
 
 
 ### experiments
@@ -60,4 +61,54 @@ All results are plotted and saved in the 'experiments' folder alongside the netw
 Helper functions for the replay buffer, plotting and saving results to 'experiments', initializing the agents, and illustrating agent performance by rendering the enviroment in 'human' mode.
 
 ### agents
+
+## Results on LunarLander-v2
+
+### DQN
+#### Returns per episode
+![Alt Text](experiments/LunarLander-v2_DQN/returns.png)
+
+
+#### Episode lengths
+![Alt Text](experiments/LunarLander-v2_DQN/lengths.png)
+
+
+#### Avg reward per 10000 frame 
+![Alt Text](experiments/LunarLander-v2_DQN/rewards.png)
+
+### REINFORCE
+#### Returns per episode
+![Alt Text](experiments/LunarLander-v2_REINFORCE/returns.png)
+
+
+#### Episode lengths
+![Alt Text](experiments/LunarLander-v2_REINFORCE/lengths.png)
+
+
+#### Avg reward per 10000 frame 
+![Alt Text](experiments/LunarLander-v2_REINFORCE/rewards.png)
+
+### AC
+#### Returns per episode
+![Alt Text](experiments/LunarLander-v2_AC/returns.png)
+
+
+#### Episode lengths
+![Alt Text](experiments/LunarLander-v2_AC/lengths.png)
+
+
+#### Avg reward per 10000 frame 
+![Alt Text](experiments/LunarLander-v2_AC/rewards.png)
+
+### PPO 
+#### Returns per episode
+![Alt Text](experiments/LunarLander-v2_PPO/returns.png)
+
+
+#### Episode lengths
+![Alt Text](experiments/LunarLander-v2_PPO/lengths.png)
+
+
+#### Avg reward per 10000 frame 
+![Alt Text](experiments/LunarLander-v2_PPO/rewards.png)
 
