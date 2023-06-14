@@ -2,6 +2,12 @@
 
 In this repo all code and results related to the special course 'Deep Reinforcement Learning' is published and described in the following sections. 
 
+Algorithms implemented: 
+* Deep Q-learning (DQN)
+* REINFORCE
+* Actor-Critic (AC)
+* Proximal Policy Optimization (PPO)
+
 ## Overview of code
 
 main.py: This is the main file to run all experiments. There is a function 'run_main(env,method,hyperparameters)' where a certain method (DeepRL algorithm) is trained on a specific enviroment with a number of hyperparameters. 
@@ -30,7 +36,7 @@ hyperparameters = {
         'continuous': False,
         'max_frames_per_episode': 1000
     }
-* eval_agent: boolean indicating whether to train the agent (False) or watch agent play (True)
+* train_agent: boolean indicating whether to train the agent (True) or load pretrained agent (False)
 
 The agent get initialized with 'get_agent(...)' from utils and then the agent can either be trained or evaluated. If 'eval_agent' = True, the function calls 'train' from 'train.py' which returns the results from the training. The results are plotted and saved in the 'experiments' folder alongside the network parameters.
 
