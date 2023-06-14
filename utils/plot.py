@@ -5,7 +5,7 @@ import numpy as np
 
 def plot(method, experiment_path, results, loss, rewards, num_frames, lengths):
     
-    best_return_id = np.where(results==max(results))[0][0]
+    best_return_id = np.where(np.array(results)==max(np.array(results)))[0][0]
     # Plot results 
     plt.figure(1)
     plt.xlabel('Episode')

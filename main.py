@@ -59,25 +59,24 @@ def run_main(env,method,hyperparameters,train_agent=True):
     agent.load_state_dict(torch.load(agent_path))
 
     # Watch agent play 10 episodes
-    play_agent(env,agent,method)
+    #play_agent(env,agent,method)
 
 if __name__=="__main__":
 
     torch.manual_seed(1234)
     # First, we create our environment
-    #env_name = "CartPole-v1"
-    env_name = "LunarLander-v2" 
+    env_name = "CartPole-v1"
+    #env_name = "LunarLander-v2" 
     continuous = False
     env = gym.make(env_name)
     state = env.reset()
     print("Env name: ", env_name)
 
     # Define learning algorithm
-    #method = 'DQN'
+    method = 'DQN'
     #method = 'REINFORCE'
-    method = 'AC'
+    #method = 'AC'
     #method = 'PPO'
-    #method = 'SAC'
 
     # Get the number of state observations and actions
     n_observations = len(state)
@@ -86,13 +85,13 @@ if __name__=="__main__":
     # Here we define the hyperparameters
     hyperparameters = {
         'num_episodes': 200,
-        'num_frames': 1000000,
+        'num_frames': 20000,
         'num_epochs': 4,
         'batch_size': 32,
         'horizon': 64,
-        'num_hidden': [128,64],
+        'num_hidden': [32,16],
         'gamma': 0.99,
-        'alpha': 3e-4,
+        'alpha': 1e-3,
         'lambda': 0.95,
         'beta': 0.01,
         'max_norm': 1.0,
