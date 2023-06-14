@@ -57,7 +57,7 @@ All results are plotted and saved in the 'experiments' folder alongside the netw
 Helper functions for the replay buffer, plotting and saving results to 'experiments', initializing the agents, and illustrating agent performance by rendering the enviroment in 'human' mode.
 
 ### agents
-The base model that DQN and REINFORCE inherits from in `DQN_agent.py` and `REINFORCE_agent.py` respectively are in `model.py` that initializes a neural network with two hidden layers, an Adam optimizer, learning rate scheduler and criterion. It also has a standard forward function, that are overwritten for some methods. For AC and PPO the 'AC' object in `AC_agent.py` is the base network with both an Actor Network and a Critic Network, both with two hidden layers. PPO is an extension / modification to AC. All agents are trained using the 'update' function in the agent classes.
+The base model that DQN and REINFORCE inherits from in `DQN_agent.py` and `REINFORCE_agent.py` respectively are in `model.py` that initializes a neural network with two hidden layers, an Adam optimizer, learning rate scheduler and criterion. It also has a standard forward function, that are overwritten for some methods. For AC and PPO the 'AC' object in `AC_agent.py` is the base network with both an Actor Network and a Critic Network, both with two hidden layers. All agents are trained using the 'update' function in the agent classes.
 
 ## Results on LunarLander-v2
 
