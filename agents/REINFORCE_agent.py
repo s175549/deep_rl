@@ -45,7 +45,12 @@ class REINFORCE(Net):
         for reward in reversed(rewards):
             G = self.gamma*G+reward
             returns.insert(0, G)
+
+        mean = np.mean(returns)
+        std = np.std(returns)
+        returns = (returns-mean) / std
         returns = torch.tensor(returns, dtype=torch.float32) 
+
 
         # Compute the policy loss
         policy_loss = []

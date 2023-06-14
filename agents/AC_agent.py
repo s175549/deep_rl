@@ -29,7 +29,7 @@ class AC(nn.Module):
                 nn.init.kaiming_uniform_(layer.weight, nonlinearity='relu')
 
         self.actor_optimizer = optim.Adam(self.actor.parameters(), lr=alpha_actor+alpha_actor*0.1)
-        self.scheduler = lr_scheduler.StepLR(self.actor_optimizer, step_size=int(num_frames/(200)), gamma=0.9)
+        self.scheduler = lr_scheduler.StepLR(self.actor_optimizer, step_size=int(num_frames/(500)), gamma=0.9)
 
         # Critic network
         self.critic = nn.Sequential(
@@ -45,7 +45,7 @@ class AC(nn.Module):
             if isinstance(layer, nn.Linear):
                 nn.init.kaiming_uniform_(layer.weight, nonlinearity='relu')
         self.critic_optimizer = optim.Adam(self.critic.parameters(), lr=alpha_critic)
-        self.critic_scheduler = lr_scheduler.StepLR(self.critic_optimizer, step_size=int(num_frames/(200)), gamma=0.9)
+        self.critic_scheduler = lr_scheduler.StepLR(self.critic_optimizer, step_size=int(num_frames/(500)), gamma=0.9)
 
         self.gamma = gamma
         self.beta = beta

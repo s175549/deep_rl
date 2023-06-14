@@ -59,7 +59,8 @@ class PPO(AC):
             minibatches.append(batch_size)
         
         # Extract step-size alpha
-        alpha = self.scheduler._last_lr[0]/self.scheduler.base_lrs[0]
+        #alpha = self.scheduler._last_lr[0]/self.scheduler.base_lrs[0]
+        alpha = 1.0
         
         # Compute generalized advantage based on trajectory of len T
         advantages = self.compute_advantage(batch)
