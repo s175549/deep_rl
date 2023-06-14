@@ -8,6 +8,15 @@ Algorithms implemented:
 * Actor-Critic (AC)
 * Proximal Policy Optimization (PPO)
 
+## Installation
+For this project Python 3.8.10 was used. Please note that when using the [Gymnasium](https://gymnasium.farama.org) package it can be necessary to download and setup [Swig](https://www.swig.org/download.html). 
+
+```bash
+git clone
+cd deep-rl
+pip install -r requirements.txt
+```
+
 ## Overview of code
 
 main.py: This is the main file to run all experiments. There is a function 'run_main(env,method,hyperparameters)' where a certain method (DeepRL algorithm) is trained on a specific enviroment with a number of hyperparameters. 
