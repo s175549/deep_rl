@@ -2,7 +2,7 @@
 
 In this repo all code and results related to the special course 'Deep Reinforcement Learning' is published and described in the following sections. 
 
-Algorithms implemented: 
+Algorithms implemented to run on "CartPole-v1" and "LunarLander-v2" with discrete action spaces: 
 * Deep Q-learning (DQN)
 * REINFORCE
 * Actor-Critic (AC)
@@ -47,7 +47,17 @@ hyperparameters = {
     }
 * train_agent: boolean indicating whether to train the agent (True) or load pretrained agent (False)
 
-The agent get initialized with 'get_agent(...)' from utils and then the agent can either be trained or evaluated. If 'eval_agent' = True, the function calls 'train' from 'train.py' which returns the results from the training. The results are plotted and saved in the 'experiments' folder alongside the network parameters.
+The agent get initialized with 'get_agent(...)' from utils and then the agent can either be trained or evaluated. If 'train_agent' = True, the function calls 'train' from 'train.py' which returns the results from the training. 
 
-train.py: 
+train.py: This is the main training loop for all agents, where the agent interact with the enviroment and gets updated. Note that the agents will be updated at different times e.g. REINFORCE after each episode, DQN after each frame. 
+
+
+
+### experiments
+All results are plotted and saved in the 'experiments' folder alongside the network parameters and the hyperparameters are saved in json files.
+
+### utils
+Helper functions for the replay buffer, plotting and saving results to 'experiments', initializing the agents, and illustrating agent performance by rendering the enviroment in 'human' mode.
+
+### agents
 
