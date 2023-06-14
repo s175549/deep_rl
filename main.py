@@ -75,8 +75,8 @@ if __name__=="__main__":
     # Define learning algorithm
     #method = 'DQN'
     #method = 'REINFORCE'
-    #method = 'AC'
-    method = 'PPO'
+    method = 'AC'
+    #method = 'PPO'
     #method = 'SAC'
 
     # Get the number of state observations and actions
@@ -88,7 +88,7 @@ if __name__=="__main__":
         'num_episodes': 200,
         'num_frames': 1000000,
         'num_epochs': 4,
-        'batch_size': 16,
+        'batch_size': 32,
         'horizon': 64,
         'num_hidden': [128,64],
         'gamma': 0.99,

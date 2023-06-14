@@ -46,6 +46,7 @@ class REINFORCE(Net):
             G = self.gamma*G+reward
             returns.insert(0, G)
 
+        # Standardize returns
         mean = np.mean(returns)
         std = np.std(returns)
         returns = (returns-mean) / std

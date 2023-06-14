@@ -52,9 +52,9 @@ if __name__=="__main__":
 
     # Define learning algorithm
     #method = 'DQN'
-    #method = 'REINFORCE'
+    method = 'REINFORCE'
     #method = 'AC'
-    method = 'PPO'
+    #method = 'PPO'
     #method = 'SAC'
 
     run_eval(env=env,method=method)
