@@ -27,6 +27,7 @@ def run_eval(env,method):
     
     # Set epsilon to zero
     hyperparameters['eps'] = 0.0
+    #hyperparameters['num_hidden'] = [32, 32]
 
     # Create agent from loaded hyperparameters
     agent = get_agent(method,input_size=n_observations,output_size=n_actions,
@@ -50,10 +51,10 @@ if __name__=="__main__":
     print("Env name: ", env_name)
 
     # Define learning algorithm
-    method = 'DQN'
+    #method = 'DQN'
     #method = 'REINFORCE'
     #method = 'AC'
-    #method = 'PPO'
+    method = 'PPO'
     #method = 'SAC'
 
     run_eval(env=env,method=method)
