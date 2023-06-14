@@ -12,7 +12,7 @@ def plot(method, experiment_path, results, loss, rewards, num_frames, lengths):
     plt.ylabel('Return')
     if min(results)<-1000:
         plt.ylim((-1000,max(results)+30))
-    plt.title('{}, episodes for best model = {}'.format(method,best_return_id))
+    plt.title('{}'.format(method))
     plt.scatter(x=best_return_id,y=max(results),c='r',marker='o',s=50)
     plt.plot(np.array(results))
     plt.legend(['Max return = {}'.format(round(max(results),1))])
@@ -35,7 +35,7 @@ def plot(method, experiment_path, results, loss, rewards, num_frames, lengths):
     plt.figure(2)
     plt.xlabel('Frame')
     plt.ylabel('Reward')
-    plt.title('{}, frames for best model = {}'.format(method, frames[best_reward_id][0]-1))
+    plt.title('{}'.format(method))
     plt.scatter(x=frames[best_reward_id],y=np.array(rewards_smooth)[best_reward_id],c='r',marker='o',s=50)
     sns.lineplot(x=frames,y=np.array(rewards_smooth))
     plt.legend(['Max avg. reward = {}'.format(round(np.array(rewards_smooth)[best_reward_id][0],2))])
