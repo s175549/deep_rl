@@ -13,7 +13,7 @@ For this project Python 3.8.10 was used. Please note that when using the [Gymnas
 
 ```bash
 git clone
-cd deep-rl
+cd deep_rl
 pip install -r requirements.txt
 ```
 
