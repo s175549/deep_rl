@@ -45,16 +45,14 @@ if __name__=="__main__":
     # First, we create our environment
     #env_name = "CartPole-v1"
     env_name = "LunarLander-v2" #
-    continuous = False
     env = gym.make(env_name)
     state = env.reset()
     print("Env name: ", env_name)
 
     # Define learning algorithm
     #method = 'DQN'
-    method = 'REINFORCE'
+    #method = 'REINFORCE'
     #method = 'AC'
-    #method = 'PPO'
-    #method = 'SAC'
+    method = 'PPO'
 
     run_eval(env=env,method=method)

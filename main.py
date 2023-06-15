@@ -65,18 +65,18 @@ if __name__=="__main__":
 
     torch.manual_seed(1234)
     # First, we create our environment
-    env_name = "CartPole-v1"
-    #env_name = "LunarLander-v2" 
-    continuous = False
+
+    #env_name = "CartPole-v1"
+    env_name = "LunarLander-v2" 
     env = gym.make(env_name)
     state = env.reset()
     print("Env name: ", env_name)
 
     # Define learning algorithm
-    method = 'DQN'
+    #method = 'DQN'
     #method = 'REINFORCE'
     #method = 'AC'
-    #method = 'PPO'
+    method = 'PPO'
 
     # Get the number of state observations and actions
     n_observations = len(state)
@@ -84,26 +84,22 @@ if __name__=="__main__":
 
     # Here we define the hyperparameters
     hyperparameters = {
-        'num_episodes': 200,
-        'num_frames': 20000,
+        'num_frames': 1000000,
         'num_epochs': 4,
-        'batch_size': 32,
+        'batch_size': 16,
         'horizon': 64,
-        'num_hidden': [32,16],
+        'num_hidden': [128,64],
         'gamma': 0.99,
-        'alpha': 1e-3,
+        'alpha': 2e-4,
         'lambda': 0.95,
         'beta': 0.01,
         'max_norm': 1.0,
         'var_eps': 0.1,
-        'tau': 0.001,
-        'n_steps': 16,
         'buffer_size': 20000,
         'eps': 1.0,
         'eps_end': 0.001,
         'eps_decay': 0.01,
         'eps_decay_rate': None,
-        'continuous': False,
         'max_frames_per_episode': 1000
     }
 
