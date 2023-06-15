@@ -32,7 +32,6 @@ def run_main(env,method,hyperparameters,train_agent=True):
                         max_frames=hyperparameters['num_frames'],
                         agent=agent,
                         num_epochs=hyperparameters['num_epochs'],
-                        gamma=hyperparameters['gamma'], 
                         batch_size=hyperparameters['batch_size'],
                         eps_decay_rate=hyperparameters['eps_decay_rate'],
                         agent_name=method,
