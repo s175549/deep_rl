@@ -2,7 +2,6 @@ from agents.DQN_agent import DQN
 from agents.REINFORCE_agent import REINFORCE
 from agents.AC_agent import AC
 from agents.PPO_agent import PPO
-from agents.SAC_agent import SAC
 
 def get_agent(agent_name,input_size,output_size,hyperparameters,env):
     agent = None
@@ -34,10 +33,4 @@ def get_agent(agent_name,input_size,output_size,hyperparameters,env):
                     var_eps=hyperparameters['var_eps'],buffer_size=hyperparameters['buffer_size'],
                     horizon=hyperparameters['horizon'],num_frames=hyperparameters['num_frames'], 
                     max_norm= hyperparameters['max_norm'])
-    elif agent_name == 'SAC':
-        agent = SAC(input_size=input_size,output_size=output_size,hidden_size=hyperparameters['num_hidden'],
-                    gamma=hyperparameters['gamma'],alpha=0.2,tau=hyperparameters['tau'],
-                    lr=hyperparameters['alpha'],max_norm=hyperparameters['max_norm'],
-                    num_frames=hyperparameters['num_frames'],
-                    buffer_size=hyperparameters['buffer_size'],env=env)
     return agent

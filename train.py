@@ -2,7 +2,7 @@ import torch
 import numpy as np
 from tqdm import tqdm
 
-def train(env,max_frames_per_episode,horizon,max_frames,agent,num_epochs=1,gamma=1,batch_size=0,
+def train(env,max_frames_per_episode,horizon,max_frames,agent,num_epochs=1,batch_size=0,
           eps_decay_rate=0,agent_name='DQN',agent_path='',buffer=None):
 
     # Get initial state
