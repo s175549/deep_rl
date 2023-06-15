@@ -61,6 +61,8 @@ The base model that DQN and REINFORCE inherits from in `DQN_agent.py` and `REINF
 
 ## Results on LunarLander-v2
 
+For all agents multiple hyperparameters was tested to obtain reasonable results, however hyperparameter tuning was not done extensively so convergence might not have been reached or the agents learn slow and sometimes unstable. 
+
 ### DQN
 Selected hyperparameters: "num_frames": 200000, "num_epochs": 4, "batch_size": 32, num_hidden": [128, 64], "alpha": 0.0001, "buffer_size": 20000, "eps": 1.0, "eps_end": 0.001, "eps_decay": 0.01
 
